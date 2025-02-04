@@ -15,54 +15,68 @@ struct Node{
 };
 
 typedef struct Node snode;
-snode* getnode(int ele){
-    snode *p = (snode*)malloc(sizeof(snode));
-    p->data = ele;
-    p->next = NULL;
-    return p;
+
+snode* getnode(int ele) {
+    snode *newNode = (snode*)malloc(sizeof(snode));
+    newNode->data = ele;
+    newNode->next = NULL;
+    return newNode;
 }
-snode* create(snode *head){
-    snode *p,*q;
+snode* create(snode *head) {
+    snode *p, *q;
     int ele;
     char a;
-    do{
-        printf("Enter the element : ");
-        scanf("%d",&ele);
+    do {
+        printf("Enter the element: ");
+        scanf("%d", &ele);
         p = getnode(ele);
-        if(head==NULL){
+        if (head == NULL) {
             head = p;
-        }else{
+        } else {
             q = head;
-            while(q->next!=NULL){
+            while (q->next != NULL) {
                 q = q->next;
             }
             q->next = p;
         }
-        printf("\nDo you want it add a node (Y/N): ");
-        scanf("%c",a);
-    }while(a=='y' || a == 'Y');
+        printf("\nDo you want to add a node (Y/N): ");
+        scanf(" %c", &a);  
+    } while (a == 'y' || a == 'Y');
     return head;
-    
 }
+
 snode* insertAtBeginning(snode *head, int ele){
     snode *p = getnode(ele);
     p->next = head;
     return p;
 }
-
-snode* insertAtEnd(snode *head,int ele){
+snode* insertAtEnd(snode *head, int ele) {
     snode *p = getnode(ele);
-    if(!head) return p;
-    snode *q = getnode(ele);
-    while(q->next != NULL){
+    if (!head) return p;
+    snode *q = head;
+    while (q->next != NULL) {
         q = q->next;
     }
     q->next = p;
     return head;
 }
 snode* insertAtPosition(snode *head,int ele,int pos){
+    snode *p = getnode(ele);
+    if(pos == 1){
+        p->next = head;
+        return p;
+    }
+    snode *q = head;    
+    for(int i = 1; i < pos - 1 && q != NULL; i++){
+        q = q->next;
+    }
+    if(q == NULL) return head;
+    p->next = q->next;
+    q->next = p;
+    return head;
 
 }
+
 snode* deleteAtBeginning(snode *head){
 
 }
@@ -88,7 +102,7 @@ void displayList(snode *head){
     if(!head) printf("Sorry the list is empty...");
     else{
         while(temp != NULL){
-        printf("%5d", temp->data);
+        printf("%5d   ", temp->data);
         temp = temp->next;
         }
     }
@@ -116,23 +130,26 @@ int menu(){
 
 int main()
 {
-    snode *head;
+    snode *head = NULL;
     int choice,ele,pos,status;
     do{
         choice = menu();
         switch (choice){
-            case 1:
+            case 1: 
                 head = create(head);
+                displayList(head);
                 break;
             case 2:
                 printf("Enter element: ");
                 scanf("%d", &ele);
                 head = insertAtBeginning(head, ele);
+                displayList(head);
                 break;
             case 3:
                 printf("Enter element: ");
                 scanf("%d", &ele);
                 head = insertAtEnd(head, ele);
+                displayList(head);
                 break;
             case 4:
                 printf("Enter element: ");
@@ -140,18 +157,22 @@ int main()
                 printf("Enter position: ");
                 scanf("%d", &pos);
                 head = insertAtPosition(head, ele, pos);
+                displayList(head);
                 break;
-            case 5:
-                head = deleteAtBeginning(head);
-                break;
-            case 6:
-                head = deleteAtEnd(head);
-                break;
-            case 7:
-                printf("Enter position to delete: ");
-                scanf("%d", &pos);
-                head = deleteAtPosition(head, pos,ele);
-                break;
+            // case 5:
+            //     head = deleteAtBeginning(head);
+            //     displayList(head);
+            //     break;
+            // case 6:
+            //     head = deleteAtEnd(head);
+            //     displayList(head);
+            //     break;
+            // case 7:
+            //     printf("Enter position to delete: ");
+            //     scanf("%d", &pos);
+            //     head = deleteAtPosition(head, pos,ele);
+            //     displayList(head);
+            //     break;
             case 8:
                 displayList(head);
                 break;
