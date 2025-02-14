@@ -12,14 +12,16 @@ Code, Compile, Run and Debug online from anywhere in world.
 struct Node {
     int data;
     struct Node *next;
+    struct Node *prev;
 };
 
 typedef struct Node dnode;
 
 dnode* getnode(int ele) {
-    dnode *newNode = (dnode*)malloc(sizeof(dnode)); 
+    dnode *newNode = (dnode*)malloc(sizeof(dnode));
     newNode->data = ele;
     newNode->next = NULL;
+    newNode->prev = NULL;
     return newNode;
 }
 
@@ -31,7 +33,7 @@ dnode* create(dnode *head) {
         printf("Enter the element: ");
         scanf("%d", &ele);
         p = getnode(ele);
-        if (head == NULL) {
+        if (!head) {
             head = p;
         } else {
             q = head;
@@ -39,6 +41,7 @@ dnode* create(dnode *head) {
                 q = q->next;
             }
             q->next = p;
+            p->prev = q;
         }
         printf("\nDo you want to add a node (Y/N): ");
         scanf(" %c", &a);  
@@ -48,8 +51,15 @@ dnode* create(dnode *head) {
 
 dnode* insertAtBeginning(dnode *head, int ele) {
     dnode *p = getnode(ele);
-    p->next = head;
-    return p;
+    if(head==NULL){
+        head=  p;
+    }
+    else{
+        p->next = head;
+        head->prev = p;
+        head = p;
+    }
+    return head;
 }
 
 dnode* insertAtEnd(dnode *head, int ele) {
@@ -129,24 +139,12 @@ int findElement(dnode *head, int ele) {
     }
     return -1;
 }
-
 void display_using_rec(dnode *head){
     if(head){
         display_using_rec(head->next);
         printf("%5d",head->data);
     }
 }
-
-int length(dnode *head) {
-    int len = 0;
-    dnode *temp = head;
-    while (temp != NULL) {
-        len++;
-        temp = temp->next;
-    }
-    return len;
-}
-
 void displayList(dnode *head) {
     dnode *temp = head;
     if (!head) {
@@ -158,7 +156,6 @@ void displayList(dnode *head) {
             temp = temp->next;
         }
         printf(" NULL\n");
-        printf("Length of the list: %d\n", length(head));
     }
 }
 

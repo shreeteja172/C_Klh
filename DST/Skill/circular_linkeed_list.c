@@ -16,21 +16,6 @@ snode* getNode(int data){
     return temp;
 }
 
-void display(snode* head){
-    snode* temp;
-    if(!head){
-        printf("Sorry the list is empty");
-    }
-    else{
-        temp = head;
-        do{
-            printf("%5d",temp->data);
-            temp = temp->next;
-        }while(temp != head);
-    }
-    printf("\n");
-}
-
 snode* createList(snode* head){
     snode* p;
     snode* q;
@@ -208,6 +193,20 @@ void search(snode* head,int key){
         printf("Not Found !\n");
         
     }
+}
+void display(snode* head){
+    snode* temp;
+    if(!head){
+        printf("Sorry the list is empty");
+    }
+    else{
+        temp = head;
+        do{
+            printf("%5d",temp->data);
+            temp = temp->next;
+        }while(temp != head);
+    }
+    printf("\n");
 }
 
 int menu(){
