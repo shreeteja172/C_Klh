@@ -1,11 +1,4 @@
-/* *****************************************************************************
 
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
-C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
-Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -77,6 +70,7 @@ dnode* insertAtPosition(dnode *head, int ele, int pos) {
     dnode *p = getnode(ele);
     if (pos == 1) {
         p->next = head;
+        if (head) head->prev = p;
         return p;
     }
     dnode *q = head;
@@ -85,9 +79,13 @@ dnode* insertAtPosition(dnode *head, int ele, int pos) {
     }
     if (q == NULL) return head;
     p->next = q->next;
+    // q->next = p;
+    if (q->next) q->next->prev = p;
     q->next = p;
+    p->prev = q;
     return head;
 }
+
 
 dnode* deleteAtBeginning(dnode *head) {
     if (!head) return NULL;
@@ -161,7 +159,7 @@ void displayList(dnode *head) {
 
 int menu() {
     int choice;
-    printf("\n\nWelcome to Single linked lists, functions press(1-10): \n");
+    printf("\n\nWelcome to D linked lists, functions press(1-10): \n");
     printf("1. Create list \n");
     printf("2. Insertion at beginning \n");
     printf("3. Insertion at End \n");

@@ -10,6 +10,7 @@ void insertionsort(int arr[],int n){
         arr[j+1] = key;
     }
 }
+
 void printarray(int arr[],int n){
     for(int i = 0 ;i<n;i++){
         printf("%d\n",arr[i]);
