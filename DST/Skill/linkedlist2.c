@@ -153,7 +153,7 @@ void displayList(snode *head) {
         printf("Sorry, the list is empty...\n");
     } else {
         printf("List elements: ");
-        while (temp != NULL) {
+        while (temp!= NULL) {
             printf("%5d ", temp->data);
             temp = temp->next;
         }
