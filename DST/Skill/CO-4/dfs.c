@@ -13,7 +13,7 @@ void DFS ( int vertex ) {
 	printf ("%d ", vertex );
 	for ( int i = 0; i < MAX ; i ++) {
 		if ( adj [ vertex ][ i] == 1 &&
-		        ! visited [i ]) {
+		        ! visited [i]) {
 			DFS (i);
 		}
 	}

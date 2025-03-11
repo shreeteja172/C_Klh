@@ -50,7 +50,7 @@ void infixToPostfix(char *infix, char *postfix) {
         if (isalnum(c)) {
             postfix[k++] = c;
         } 
-        else if (c == '(') {
+        else if (c == '(')  {
             push(&s, c);
         } 
         else if (c == ')') {
@@ -74,7 +74,7 @@ void infixToPostfix(char *infix, char *postfix) {
 }
 
 int main() {
-    char infix[MAX_SIZE] = "(A+B)*C";
+    char infix[MAX_SIZE] = "A+B-C*D/E+F-G";
     char postfix[MAX_SIZE];
 
     infixToPostfix(infix, postfix);
