@@ -34,7 +34,7 @@ void mergeSortHelper(int nums[], int low, int high) {
     if (low >= high) return;
     int mid = (low + high) / 2;
     mergeSortHelper(nums, low, mid);
-    mergeSortHelper(nums, mid + 1, high);
+    mergeSortHelper(nums, mid + 1, high); //yeh divide karta
     merge(nums, low, mid, high);
 }
 

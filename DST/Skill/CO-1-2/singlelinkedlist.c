@@ -52,16 +52,16 @@ snode* insertAtBeginning(snode *head, int ele) {
     return p;
 }
 
-snode* insertAtEnd(snode *head, int ele) {
-    snode *p = getnode(ele);
-    if (!head) return p;
-    snode *q = head;
-    while (q->next != NULL) {
-        q = q->next;
+    snode* insertAtEnd(snode *head, int ele) {
+        snode *p = getnode(ele);
+        if (!head) return p;
+        snode *q = head;
+        while (q->next != NULL) {
+            q = q->next;
+        }
+        q->next = p;
+        return head;
     }
-    q->next = p;
-    return head;
-}
 
 snode* insertAtPosition(snode *head, int ele, int pos) {
     snode *p = getnode(ele);
